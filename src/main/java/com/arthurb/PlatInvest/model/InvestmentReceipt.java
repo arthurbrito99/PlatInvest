@@ -28,7 +28,8 @@ public class InvestmentReceipt {
     public InvestmentReceipt() {
     }
 
-    public InvestmentReceipt(Company company, Integer quantity, Double total) {
+    public InvestmentReceipt(InvestmentRecord investmentRecord, Company company, Integer quantity, Double total) {
+        this.investmentRecord = investmentRecord;
         this.company = company;
         this.quantity = quantity;
         this.total = total;

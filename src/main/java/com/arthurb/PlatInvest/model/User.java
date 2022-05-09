@@ -62,4 +62,16 @@ public class User {
     public void setInvestment(List<UserInvestment> investment) {
         this.investment = investment;
     }
+
+    public User createInvestment(Company company, Integer quantity) {
+        this.investment.add(new UserInvestment(company, quantity, this));
+        return this;
+    }
+
+    public User updateInvestment(Company company, Integer quantity) {
+        int index = this.investment.indexOf(this.investment.stream().filter(investment -> investment.getCompany().equals(company)).findFirst().get());
+        this.investment.get(index).setQuantity(quantity);
+        this.investment.get(index).setInvestedValue(quantity * company.getPrice());
+        return this;
+    }
 }

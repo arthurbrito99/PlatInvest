@@ -21,12 +21,17 @@ public class UserInvestment {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "investedValue")
+    private Double investedValue;
+
     public UserInvestment() {
     }
 
-    public UserInvestment(Company company, Integer quantity) {
+    public UserInvestment(Company company, Integer quantity, User user) {
         this.company = company;
         this.quantity = quantity;
+        this.user = user;
+        this.investedValue = company.getPrice() * quantity;
     }
 
     public Company getCompany() {
@@ -43,5 +48,13 @@ public class UserInvestment {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getInvestedValue() {
+        return investedValue;
+    }
+
+    public void setInvestedValue(Double investedValue) {
+        this.investedValue = this.company.getPrice() * this.quantity;
     }
 }

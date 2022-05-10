@@ -1,9 +1,8 @@
 package com.arthurb.PlatInvest.model;
 
-import org.hibernate.annotations.Type;
-import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +16,14 @@ public class User {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty
     private String name;
 
     @Column(name = "cpf")
+    @NotNull
     private String cpf;
-//    @Column(name = "investment")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private List<UserInvestment> investment = new ArrayList<>();
-
 
     public User() {
     }

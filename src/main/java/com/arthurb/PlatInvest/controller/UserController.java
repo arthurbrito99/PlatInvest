@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @Validated @RequestBody User user){
         User userToUpdate = userRepository.findById(id).orElse(null);
         if(userToUpdate != null){
             userToUpdate.setName(user.getName());
@@ -42,6 +43,10 @@ public class UserController {
 
     @GetMapping("/user/cpf")
     public ResponseEntity<User> getUserByCpf(@RequestParam("cpf") String cpf){
-        return ResponseEntity.ok(userRepository.findByCpf(cpf));
+        try {
+            return ResponseEntity.ok(userRepository.findByCpf(cpf));
+        } catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }

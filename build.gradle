@@ -19,6 +19,8 @@ dependencies {
 	implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 	implementation 'org.junit.platform:junit-platform-launcher:1.8.2'
 	implementation 'org.mockito:mockito-junit-jupiter:4.5.1'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

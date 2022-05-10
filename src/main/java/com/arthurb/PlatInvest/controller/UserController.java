@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/user")
+    @PostMapping("/user/create")
     public ResponseEntity<User> createUser(@Validated @RequestBody User user){
         try {
             return ResponseEntity.ok(userRepository.save(user));

@@ -1,6 +1,7 @@
 package com.arthurb.PlatInvest.model;
 
 import org.hibernate.annotations.Type;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class User {
     public Long getId() {
         return id;
     }
+
+    public Long setId(Long id) { return this.id = id; }
 
     public String getName() {
         return name;

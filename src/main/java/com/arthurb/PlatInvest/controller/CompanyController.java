@@ -25,7 +25,7 @@ public class CompanyController {
     }
 
     @PutMapping("/company/{id}")
-    public ResponseEntity<Company> updateCompany(@PathVariable("id") Long id, @RequestBody Company company){
+    public ResponseEntity<Company> updateCompany(@PathVariable("id") Long id, @Validated @RequestBody Company company){
         Company auxCompany = companyRepository.findById(id).orElse(null);
         if(auxCompany != null){
             auxCompany.setStock(company.getStock());
@@ -57,6 +57,10 @@ public class CompanyController {
 
     @GetMapping("/company/status")
     public ResponseEntity<List<Company>> getAllCompanyByStatus(@RequestParam("status") Boolean status){
-        return ResponseEntity.ok(companyRepository.findByStatus(status));
+        try {
+            return ResponseEntity.ok(companyRepository.findByStatus(status));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

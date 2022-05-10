@@ -1,6 +1,8 @@
 package com.arthurb.PlatInvest.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "companies")
@@ -9,12 +11,16 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "stock")
+    @NotEmpty
     private String stock;
     @Column(name = "ticker")
+    @NotEmpty
     private String ticker;
     @Column(name = "price")
+    @NotNull
     private Double price;
     @Column(name = "status")
+    @NotNull
     private Boolean status;
 
     public Company() {

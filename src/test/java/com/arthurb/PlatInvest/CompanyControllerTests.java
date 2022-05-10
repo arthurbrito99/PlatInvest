@@ -93,7 +93,6 @@ public class CompanyControllerTests {
         ArrayList<Company> companies = new ArrayList<>(Arrays.asList(company1, company2, company3));
         ArrayList<Company> activeCompanies = (ArrayList<Company>) companies.stream()
                 .filter(Company::getStatus).collect(Collectors.toList());
-        System.out.println(activeCompanies);
         Mockito.when(companyRepository.findByStatus(true)).thenReturn(activeCompanies);
 
         mockMvc.perform(get("/api/company/status")

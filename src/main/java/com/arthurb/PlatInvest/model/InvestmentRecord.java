@@ -14,6 +14,9 @@ public class InvestmentRecord {
     @OneToMany(mappedBy = "investmentRecord", cascade = CascadeType.ALL)
     private List<InvestmentReceipt> receipt = new ArrayList<>();
 
+    @Column(name = "investorCpf")
+    private String investorCpf;
+
     @Column(name = "total")
     private Double total;
 
@@ -36,6 +39,10 @@ public class InvestmentRecord {
     public void setReceipt(List<InvestmentReceipt> receipt) {
         this.receipt = receipt;
     }
+
+    public String getInvestorCpf() { return investorCpf; }
+
+    public void setInvestorCpf(String investorCpf) { this.investorCpf = investorCpf; }
 
     public Double getTotal() {
         return total;

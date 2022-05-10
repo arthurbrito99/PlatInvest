@@ -96,6 +96,7 @@ public class InvestmentController {
 
         investmentRecord.setTotal(investmentForm.getValue()-remainingValue);
         investmentRecord.setChange(remainingValue);
+        investmentRecord.setInvestorCpf(actualUser.getCpf());
         investmentRepository.save(investmentRecord);
 
         return ResponseEntity.ok(investmentRecord);

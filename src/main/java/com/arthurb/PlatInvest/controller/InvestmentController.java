@@ -28,11 +28,15 @@ public class InvestmentController {
 
     @GetMapping("/investment")
     public ResponseEntity<List<InvestmentRecord>> getAllInvestmentRecord(){
-        return ResponseEntity.ok(investmentRepository.findAll());
+        try {
+            return ResponseEntity.ok(investmentRepository.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/investment")
-    public ResponseEntity<InvestmentRecord> invest(@RequestBody InvestmentForm investmentForm){
+    public ResponseEntity<InvestmentRecord> invest(@Validated @RequestBody InvestmentForm investmentForm){
 
         User actualUser = userRepository.findByCpf(investmentForm.getCpf());
         List<Company> activeCompanies = companyRepository.findByStatus(true);
@@ -42,13 +46,14 @@ public class InvestmentController {
 
         InvestmentRecord investmentRecord = new InvestmentRecord();
 
+//        Verifica se o usuário quer investir em todas as empresas disponíveis
         if(investmentForm.getQuantity() >= activeCompanies.size()) {
             companiesToInvest.addAll(activeCompanies);
-
             companiesToInvest.sort(Comparator.comparing(Company::getPrice));
         } else {
             for (Company company : activeCompanies) {
                 UserInvestment investment = userInvestments.stream().filter(investmentItem -> investmentItem.getCompany().equals(company)).findFirst().orElse(null);
+//                Seleciona as empresas que o usuário ainda não investiu
                 if (investment == null) {
                     companiesToInvest.add(company);
                 }
@@ -59,6 +64,7 @@ public class InvestmentController {
 
             if (companiesToInvest.size() < investmentForm.getQuantity()) {
                 userInvestments.sort(Comparator.comparing(UserInvestment::getInvestedValue));
+//                Caso ainda não tenha selecionado todas as empresas, seleciona as que o usuário já investiu menos
 
                 for (UserInvestment investment : userInvestments) {
                     companiesToInvest.add(investment.getCompany());

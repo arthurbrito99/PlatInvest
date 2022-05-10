@@ -1,8 +1,13 @@
 package com.arthurb.PlatInvest.model;
 
+import javax.validation.constraints.NotNull;
+
 public class InvestmentForm {
+    @NotNull
     private Double value;
+    @NotNull
     private String cpf;
+    @NotNull
     private Integer quantity;
 
     public InvestmentForm() {

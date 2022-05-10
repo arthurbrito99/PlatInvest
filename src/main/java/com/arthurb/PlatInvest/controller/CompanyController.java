@@ -15,7 +15,7 @@ public class CompanyController {
     @Autowired
     CompanyRepository companyRepository;
 
-    @PostMapping("/company")
+    @PostMapping("/company/create")
     public ResponseEntity<Company> createCompany(@Validated @RequestBody Company company){
         try {
             return ResponseEntity.ok(companyRepository.save(company));

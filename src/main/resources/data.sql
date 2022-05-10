@@ -6,3 +6,6 @@ INSERT INTO companies (stock, ticker, price, status) VALUES
     ('CVC', 'CVCB3', 20.87, true),
     ('Renner', 'LREN3', 36.95, true),
     ('Marisa', 'AMAR3', 6.30, true);
+
+INSERT INTO user (name, cpf) VALUES
+    ('Lucas', '57625851664');

@@ -19,3 +19,5 @@ Para executar os testes unitários do projeto, acesse a pasta raiz do repositór
 - Um usuário com nome Lucas e CPF fictício 57625851664 é instanciado no início da aplicação também.
 - A documentação da API estará disponível na url http://localhost:8080/swagger-ui.html
 
+Por Arthur de Brito Bonifácio
+
